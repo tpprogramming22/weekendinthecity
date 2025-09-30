@@ -1,0 +1,27 @@
+{
+  "name": "Weekend in the City - Munich's Premier Book Club",
+  "short_name": "Weekend in the City",
+  "description": "Join Munich's most vibrant all-girls book club for literary adventures, meaningful discussions, and unforgettable experiences.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fefdfb",
+  "theme_color": "#e52100",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/weekendinthecity.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/weekendinthecity.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["books", "lifestyle", "social"],
+  "lang": "en",
+  "dir": "ltr"
+}
