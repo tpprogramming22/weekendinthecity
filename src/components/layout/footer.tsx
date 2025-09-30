@@ -23,7 +23,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-gray-600 text-sm">
-              Munich's premier all-girls book club. Join us for literary adventures, 
+              Munich&apos;s premier all-girls book club. Join us for literary adventures, 
               meaningful discussions, and unforgettable experiences.
             </p>
             <div className="flex space-x-4">

@@ -64,17 +64,17 @@ export default function Home() {
               <div className="space-y-4">
                 <div className="flex items-center justify-center lg:justify-start">
                   <div className="relative h-24 w-24 lg:h-32 lg:w-32">
-                    <Image
+        <Image
                       src="/weekendinthecity.png"
                       alt="Weekend in the City Logo"
                       fill
                       className="object-contain"
-                      priority
-                    />
+          priority
+        />
                   </div>
                 </div>
                 <p className="text-xl text-gray-600 font-medium">
-                  Munich's Premier All-Girls Book Club
+                  Munich&apos;s Premier All-Girls Book Club
                 </p>
                 <p className="text-lg text-gray-500 leading-relaxed">
                   Join our vibrant community of book lovers for literary adventures, 
@@ -125,7 +125,7 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="space-y-3">
-                      <h4 className="font-medium text-gray-800">"The Seven Husbands of Evelyn Hugo"</h4>
+                      <h4 className="font-medium text-gray-800">&ldquo;The Seven Husbands of Evelyn Hugo&rdquo;</h4>
                       <p className="text-sm text-gray-600">
                         Join us for an intimate discussion of this captivating novel about 
                         love, ambition, and the price of fame.
@@ -214,7 +214,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800 mb-2">Unique Experiences</h3>
-                    <p className="text-gray-600">Enjoy author meet-and-greets, literary brunches, and exclusive book launches in Munich's finest venues.</p>
+                    <p className="text-gray-600">Enjoy author meet-and-greets, literary brunches, and exclusive book launches in Munich&apos;s finest venues.</p>
                   </div>
                 </div>
               </div>
@@ -228,7 +228,7 @@ export default function Home() {
                   </div>
                   <h3 className="font-semibold text-gray-800 text-xl">Join 200+ Book Lovers</h3>
                   <p className="text-gray-600">
-                    Our community is growing every month. Be part of Munich's most vibrant 
+                    Our community is growing every month. Be part of Munich&apos;s most vibrant 
                     literary community and make friends for life.
                   </p>
                   <Button variant="default" size="lg" className="w-full">
