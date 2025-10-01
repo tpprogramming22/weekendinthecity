@@ -10,36 +10,36 @@ import Image from 'next/image'
 const featuredEvents = [
   {
     id: '1',
-    title: 'Spring Book Club Meetup',
-    description: 'Join us for an intimate discussion of "The Seven Husbands of Evelyn Hugo" by Taylor Jenkins Reid. Wine and light refreshments included.',
+    title: 'Sip & Paint',
+    description: 'Unleash your creativity while enjoying fine wine and painting. No experience necessary - just bring your enthusiasm and we\'ll provide everything else.',
     date: 'March 15, 2024',
-    time: '7:00 PM',
+    time: '19:00',
     location: 'Café Luitpold, Munich',
     price: 25,
     capacity: 20,
     sold: 12,
     image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=250&fit=crop&crop=center',
-    category: 'Book Discussion'
+    category: 'Creative Workshop'
   },
   {
     id: '2',
-    title: 'Literary Brunch & Author Talk',
-    description: 'Meet local author Sarah Müller as she discusses her latest novel "Munich Nights". Brunch buffet and signed book included.',
+    title: 'Yoga & Brunch',
+    description: 'Start your weekend with a relaxing yoga session followed by a delicious brunch. Perfect for mind, body, and soul wellness.',
     date: 'March 22, 2024',
-    time: '11:00 AM',
+    time: '11:00',
     location: 'Hotel Bayerischer Hof, Munich',
     price: 45,
     capacity: 30,
     sold: 8,
     image: 'https://images.unsplash.com/photo-1551218808-94e220e084d2?w=400&h=250&fit=crop&crop=center',
-    category: 'Author Event'
+    category: 'Wellness Event'
   },
   {
     id: '3',
     title: 'Book Swap & Wine Tasting',
     description: 'Bring your favorite books to swap and enjoy a curated wine tasting. Perfect for discovering new reads and making friends.',
     date: 'March 29, 2024',
-    time: '6:30 PM',
+    time: '18:30',
     location: 'Weinhandlung am Viktualienmarkt',
     price: 35,
     capacity: 25,
@@ -59,22 +59,18 @@ export default function Home() {
         </div>
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+          {/* Main Headline */}
+          <div className="text-center mb-16">
+            <h1 className="text-6xl lg:text-8xl font-bold text-red-600">
+              WEEKEND IN THE CITY
+            </h1>
+          </div>
+          
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               <div className="space-y-4">
-                <div className="flex items-center justify-center lg:justify-start">
-                  <div className="relative h-24 w-24 lg:h-32 lg:w-32">
-        <Image
-                      src="/weekendinthecity.png"
-                      alt="Weekend in the City Logo"
-                      fill
-                      className="object-contain"
-          priority
-        />
-                  </div>
-                </div>
                 <p className="text-xl text-gray-600 font-medium">
-                  Munich&apos;s Premier All-Girls Book Club
+                  Your Munich weekend starts here
                 </p>
                 <p className="text-lg text-gray-500 leading-relaxed">
                   Join our vibrant community of book lovers for literary adventures, 
@@ -152,11 +148,11 @@ export default function Home() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="font-sans font-bold text-4xl lg:text-5xl text-gray-700 mb-4">
-              Upcoming Events
+              Coming up
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Join us for our carefully curated events designed to bring book lovers together 
-              in beautiful Munich locations.
+              Join a community that makes Munich feel like home. Connect with like-minded women 
+              through meaningful experiences and lasting friendships.
             </p>
           </div>
 

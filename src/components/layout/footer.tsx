@@ -28,7 +28,7 @@ export function Footer() {
             </p>
             <div className="flex space-x-4">
               <a 
-                href="https://instagram.com" 
+                href="https://instagram.com/weekend.inthecity" 
                 className="text-gray-500 hover:text-gray-700 transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -64,7 +64,7 @@ export function Footer() {
               </div>
               <div className="flex items-center space-x-2 text-gray-600 text-sm">
                 <Mail className="h-4 w-4" />
-                <span>hello@weekendinthecity.com</span>
+                <span>Weekendinthecity.muc@gmail.com</span>
               </div>
             </div>
           </div>
