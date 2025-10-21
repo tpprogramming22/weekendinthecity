@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { stripe } from '@/lib/stripe'
 import { supabase } from '@/lib/supabase'
+import { resend } from '@/lib/resend'
+import { BookingConfirmationEmail, getBookingConfirmationText } from '@/lib/email-templates'
 import Stripe from 'stripe'
+import { createElement } from 'react'
+import { renderToStaticMarkup } from 'react-dom/server'
 
 export async function POST(request: NextRequest) {
   const body = await request.text()
@@ -83,8 +87,59 @@ export async function POST(request: NextRequest) {
 
         console.log(`✅ Booking confirmed! Event ${eventId} sold count updated to ${currentEvent.sold + 1}`)
 
-        // TODO: Send confirmation email here (Step 8)
-        // We'll add email sending in the next step
+        // Fetch full booking and event details for email
+        const { data: fullBooking } = await supabase
+          .from('bookings')
+          .select('*')
+          .eq('id', bookingId)
+          .single()
+
+        const { data: fullEvent } = await supabase
+          .from('events')
+          .select('*')
+          .eq('id', eventId)
+          .single()
+
+        if (fullBooking && fullEvent) {
+          try {
+            // Render email template to HTML
+            const emailHtml = renderToStaticMarkup(
+              createElement(BookingConfirmationEmail, {
+                customerName: fullBooking.customer_name,
+                eventTitle: fullEvent.title,
+                eventDate: fullEvent.date,
+                eventTime: fullEvent.time,
+                eventLocation: fullEvent.location,
+                amountPaid: fullBooking.amount_paid,
+                bookingId: fullBooking.id,
+              })
+            )
+
+            const emailText = getBookingConfirmationText({
+              customerName: fullBooking.customer_name,
+              eventTitle: fullEvent.title,
+              eventDate: fullEvent.date,
+              eventTime: fullEvent.time,
+              eventLocation: fullEvent.location,
+              amountPaid: fullBooking.amount_paid,
+              bookingId: fullBooking.id,
+            })
+
+            // Send confirmation email
+            await resend.emails.send({
+              from: 'Weekend in the City <onboarding@resend.dev>', // You'll change this to your verified domain
+              to: fullBooking.customer_email,
+              subject: `Booking Confirmed: ${fullEvent.title}`,
+              html: emailHtml,
+              text: emailText,
+            })
+
+            console.log(`📧 Confirmation email sent to ${fullBooking.customer_email}`)
+          } catch (emailError) {
+            console.error('Error sending confirmation email:', emailError)
+            // Don't fail the webhook if email fails
+          }
+        }
 
         break
       }
