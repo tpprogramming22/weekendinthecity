@@ -5,51 +5,69 @@ import { EventCard } from '@/components/ui/event-card'
 import { BookOpen, Heart, Users, Calendar, Sparkles, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
+import { supabase } from '@/lib/supabase'
 
-// Mock data for featured events
-const featuredEvents = [
-  {
-    id: '1',
-    title: 'Sip & Paint',
-    description: 'Unleash your creativity while enjoying fine wine and painting. No experience necessary - just bring your enthusiasm and we\'ll provide everything else.',
-    date: 'March 15, 2024',
-    time: '19:00',
-    location: 'Café Luitpold, Munich',
-    price: 25,
-    capacity: 20,
-    sold: 12,
-    image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=250&fit=crop&crop=center',
-    category: 'Creative Workshop'
-  },
-  {
-    id: '2',
-    title: 'Yoga & Brunch',
-    description: 'Start your weekend with a relaxing yoga session followed by a delicious brunch. Perfect for mind, body, and soul wellness.',
-    date: 'March 22, 2024',
-    time: '11:00',
-    location: 'Hotel Bayerischer Hof, Munich',
-    price: 45,
-    capacity: 30,
-    sold: 8,
-    image: 'https://images.unsplash.com/photo-1551218808-94e220e084d2?w=400&h=250&fit=crop&crop=center',
-    category: 'Wellness Event'
-  },
-  {
-    id: '3',
-    title: 'Book Swap & Wine Tasting',
-    description: 'Bring your favorite books to swap and enjoy a curated wine tasting. Perfect for discovering new reads and making friends.',
-    date: 'March 29, 2024',
-    time: '18:30',
-    location: 'Weinhandlung am Viktualienmarkt',
-    price: 35,
-    capacity: 25,
-    sold: 18,
-    image: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=250&fit=crop&crop=center',
-    category: 'Social Event'
-  }
-]
+interface Event {
+  id: string
+  title: string
+  description: string
+  date: string
+  time: string
+  location: string
+  price: number
+  capacity: number
+  sold: number
+  image: string
+  category: string
+}
 
 export default function Home() {
+  const [events, setEvents] = useState<Event[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    async function fetchEvents() {
+      try {
+        setIsLoading(true)
+        const { data, error } = await supabase
+          .from('events')
+          .select('*')
+          .order('created_at', { ascending: true })
+
+        if (error) {
+          throw error
+        }
+
+        // Transform the data to match the Event interface
+        const transformedEvents: Event[] = (data || []).map(event => ({
+          id: event.id.toString(),
+          title: event.title,
+          description: event.description,
+          date: event.date,
+          time: event.time,
+          location: event.location,
+          price: event.price,
+          capacity: event.capacity,
+          sold: event.sold,
+          image: event.image,
+          category: event.category
+        }))
+
+        setEvents(transformedEvents)
+        setError(null)
+      } catch (err) {
+        console.error('Error fetching events:', err)
+        setError('Failed to load events. Please try again later.')
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchEvents()
+  }, [])
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -156,24 +174,52 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {featuredEvents.map((event) => (
-              <EventCard 
-                key={event.id} 
-                event={event} 
-                onBookNow={(eventId) => console.log('Book now:', eventId)}
-              />
-            ))}
-          </div>
+          {/* Loading State */}
+          {isLoading && (
+            <div className="text-center py-12">
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-gray-700"></div>
+              <p className="mt-4 text-gray-600">Loading events...</p>
+            </div>
+          )}
 
-          <div className="text-center">
-            <Link href="/events">
-              <Button variant="outline" size="lg">
-                View All Events
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-          </div>
+          {/* Error State */}
+          {error && !isLoading && (
+            <div className="text-center py-12">
+              <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
+                <p className="text-red-800 font-medium">{error}</p>
+              </div>
+            </div>
+          )}
+
+          {/* Events Grid */}
+          {!isLoading && !error && events.length > 0 && (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                {events.map((event) => (
+                  <EventCard 
+                    key={event.id} 
+                    event={event}
+                  />
+                ))}
+              </div>
+
+              <div className="text-center">
+                <Link href="/events">
+                  <Button variant="outline" size="lg">
+                    View All Events
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
+            </>
+          )}
+
+          {/* No Events State */}
+          {!isLoading && !error && events.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-gray-600">No events available at the moment. Check back soon!</p>
+            </div>
+          )}
         </div>
       </section>
 

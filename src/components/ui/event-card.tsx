@@ -1,7 +1,9 @@
 'use client'
 
+import { useState } from 'react'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { BookingModal } from '@/components/ui/booking-modal'
 import { Calendar, Clock, MapPin, Users, Heart } from 'lucide-react'
 import Image from 'next/image'
 
@@ -26,7 +28,15 @@ interface EventCardProps {
 
 export function EventCard({ event, onBookNow }: EventCardProps) {
   const isSoldOut = event.sold >= event.capacity
-  const remainingTickets = event.capacity - event.sold
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleBookClick = () => {
+    if (onBookNow) {
+      onBookNow(event.id)
+    } else {
+      setIsModalOpen(true)
+    }
+  }
 
   return (
     <Card className="group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
@@ -71,7 +81,9 @@ export function EventCard({ event, onBookNow }: EventCardProps) {
         <div className="flex items-center justify-between text-sm">
           <div className="flex items-center text-gray-600">
             <Users className="h-4 w-4 mr-2" />
-            <span>{remainingTickets} of {event.capacity} spots left</span>
+            <span className={isSoldOut ? 'font-semibold text-red-600' : ''}>
+              {event.sold}/{event.capacity} sold
+            </span>
           </div>
           <div className="font-semibold text-gray-700">
             €{event.price}
@@ -85,11 +97,18 @@ export function EventCard({ event, onBookNow }: EventCardProps) {
           size="sm" 
           className="w-full"
           disabled={isSoldOut}
-          onClick={() => onBookNow?.(event.id)}
+          onClick={handleBookClick}
         >
           {isSoldOut ? 'Sold Out' : 'Book Now'}
         </Button>
       </CardFooter>
+
+      {/* Booking Modal */}
+      <BookingModal
+        event={event}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </Card>
   )
 }
