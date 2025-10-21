@@ -127,7 +127,7 @@ export async function POST(request: NextRequest) {
 
             // Send confirmation email
             await resend.emails.send({
-              from: 'Weekend in the City <onboarding@resend.dev>', // You'll change this to your verified domain
+              from: 'Weekend in the City <noreply@weekendinthecity.com>',
               to: fullBooking.customer_email,
               subject: `Booking Confirmed: ${fullEvent.title}`,
               html: emailHtml,
