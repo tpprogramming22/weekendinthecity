@@ -2,10 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { stripe } from '@/lib/stripe'
 import { supabase } from '@/lib/supabase'
 import { resend } from '@/lib/resend'
-import { BookingConfirmationEmail, getBookingConfirmationText } from '@/lib/email-templates'
+import { getBookingConfirmationHTML, getBookingConfirmationText } from '@/lib/email-templates'
 import Stripe from 'stripe'
-import { createElement } from 'react'
-import { renderToStaticMarkup } from 'react-dom/server'
 
 export async function POST(request: NextRequest) {
   const body = await request.text()
@@ -102,18 +100,16 @@ export async function POST(request: NextRequest) {
 
         if (fullBooking && fullEvent) {
           try {
-            // Render email template to HTML
-            const emailHtml = renderToStaticMarkup(
-              createElement(BookingConfirmationEmail, {
-                customerName: fullBooking.customer_name,
-                eventTitle: fullEvent.title,
-                eventDate: fullEvent.date,
-                eventTime: fullEvent.time,
-                eventLocation: fullEvent.location,
-                amountPaid: fullBooking.amount_paid,
-                bookingId: fullBooking.id,
-              })
-            )
+            // Generate email HTML and text
+            const emailHtml = getBookingConfirmationHTML({
+              customerName: fullBooking.customer_name,
+              eventTitle: fullEvent.title,
+              eventDate: fullEvent.date,
+              eventTime: fullEvent.time,
+              eventLocation: fullEvent.location,
+              amountPaid: fullBooking.amount_paid,
+              bookingId: fullBooking.id,
+            })
 
             const emailText = getBookingConfirmationText({
               customerName: fullBooking.customer_name,
