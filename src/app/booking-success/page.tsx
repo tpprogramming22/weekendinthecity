@@ -10,7 +10,6 @@ export default function BookingSuccess() {
   const searchParams = useSearchParams()
   const sessionId = searchParams.get('session_id')
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading')
-  const [bookingDetails, setBookingDetails] = useState<any>(null)
 
   useEffect(() => {
     if (!sessionId) {
@@ -22,9 +21,6 @@ export default function BookingSuccess() {
     // For now, we'll just show success
     setTimeout(() => {
       setStatus('success')
-      setBookingDetails({
-        sessionId: sessionId
-      })
     }, 1000)
   }, [sessionId])
 

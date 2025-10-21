@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button'
 import { EventCard } from '@/components/ui/event-card'
 import { BookOpen, Heart, Users, Calendar, Sparkles, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabase'
 

@@ -3,7 +3,6 @@
 import { Button } from '@/components/ui/button'
 import { Heart, BookOpen, Users, Sparkles, Calendar, MapPin } from 'lucide-react'
 import Link from 'next/link'
-import Image from 'next/image'
 
 export default function AboutPage() {
   return (
