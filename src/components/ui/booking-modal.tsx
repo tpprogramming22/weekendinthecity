@@ -160,7 +160,7 @@ export function BookingModal({ event, isOpen, onClose }: BookingModalProps) {
 
           <p className="text-xs text-gray-500 text-center">
             You&apos;ll be redirected to Stripe to complete your payment securely.
-            PayPal is also accepted.
+            Apple Pay and Google Pay available on supported devices.
           </p>
         </form>
       </div>
