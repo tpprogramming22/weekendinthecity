@@ -4,7 +4,7 @@ import { stripe } from '@/lib/stripe'
 export async function GET() {
   try {
     // Try to retrieve the Stripe account to verify connection
-    const account = await stripe.account.retrieve()
+    const account = await stripe.accounts.retrieve()
     
     return NextResponse.json({
       success: true,
