@@ -83,7 +83,7 @@ export default function Home() {
             </h1>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="max-w-4xl mx-auto text-center">
             <div className="space-y-8">
               <div className="space-y-4">
                 <p className="text-xl text-gray-600 font-medium">
@@ -96,19 +96,21 @@ export default function Home() {
                 </p>
               </div>
               
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button variant="default" size="lg" className="group">
-                  <Calendar className="mr-2 h-5 w-5" />
-                  View Upcoming Events
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/events">
+                  <Button variant="default" size="lg" className="group">
+                    <Calendar className="mr-2 h-5 w-5" />
+                    View Upcoming Events
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
                 <Button variant="outline" size="lg">
                   <Heart className="mr-2 h-5 w-5" />
                   Join Our Club
                 </Button>
               </div>
 
-              <div className="flex items-center space-x-8 text-sm text-gray-500">
+              <div className="flex items-center justify-center space-x-8 text-sm text-gray-500">
                 <div className="flex items-center">
                   <Users className="h-4 w-4 mr-2" />
                   <span>200+ Members</span>
@@ -122,39 +124,6 @@ export default function Home() {
                   <span>Monthly Events</span>
                 </div>
               </div>
-            </div>
-
-            <div className="relative">
-              <div className="relative z-10">
-                <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-2xl">
-                  <div className="space-y-6">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-12 h-12 bg-gradient-to-r from-gray-600 to-gray-700 rounded-full flex items-center justify-center">
-                        <BookOpen className="h-6 w-6 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-gray-800">Next Book Club Meeting</h3>
-                        <p className="text-sm text-gray-500">March 15, 2024</p>
-                      </div>
-                    </div>
-                    <div className="space-y-3">
-                      <h4 className="font-medium text-gray-800">&ldquo;The Seven Husbands of Evelyn Hugo&rdquo;</h4>
-                      <p className="text-sm text-gray-600">
-                        Join us for an intimate discussion of this captivating novel about 
-                        love, ambition, and the price of fame.
-                      </p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm font-medium text-gray-700">€25 per person</span>
-                        <span className="text-xs text-gray-500">8 spots left</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Floating decorative elements */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-r from-gray-300 to-gray-400 rounded-full opacity-60 animate-float"></div>
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-r from-gray-400 to-gray-500 rounded-full opacity-40 animate-float" style={{animationDelay: '2s'}}></div>
             </div>
           </div>
         </div>
