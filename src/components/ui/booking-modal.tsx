@@ -66,25 +66,34 @@ export function BookingModal({ event, isOpen, onClose }: BookingModalProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 relative">
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          disabled={isLoading}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors disabled:opacity-50"
-        >
-          <X className="h-6 w-6" />
-        </button>
-
-        {/* Header */}
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">Complete Your Booking</h2>
-          <p className="text-gray-600">{event.title}</p>
-          <div className="mt-2 text-sm text-gray-500">
-            <p>{event.date} at {event.time}</p>
-            <p className="font-semibold text-gray-700 mt-1">€{event.price}</p>
-          </div>
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm relative">
+        {/* Event Image */}
+        <div className="relative overflow-hidden rounded-t-2xl">
+          <img
+            src={event.image}
+            alt={event.title}
+            className="w-full h-48 object-cover"
+          />
+          <button
+            onClick={onClose}
+            disabled={isLoading}
+            className="absolute top-4 right-4 bg-white/80 hover:bg-white text-gray-600 hover:text-gray-700 p-2 rounded-full transition-all disabled:opacity-50"
+          >
+            <X className="h-4 w-4" />
+          </button>
         </div>
+
+        {/* Content */}
+        <div className="p-6">
+          {/* Header */}
+          <div className="mb-6">
+            <h2 className="text-xl font-bold text-gray-800 mb-2">Complete Your Booking</h2>
+            <p className="text-gray-600 mb-2">{event.title}</p>
+            <div className="text-sm text-gray-500">
+              <p>{event.date} at {event.time}</p>
+              <p className="font-semibold text-gray-700 mt-1">€{event.price}</p>
+            </div>
+          </div>
 
         {/* Error Message */}
         {error && (
@@ -163,6 +172,7 @@ export function BookingModal({ event, isOpen, onClose }: BookingModalProps) {
             Apple Pay and Google Pay available on supported devices.
           </p>
         </form>
+        </div>
       </div>
     </div>
   )
