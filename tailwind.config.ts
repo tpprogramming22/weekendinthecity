@@ -62,6 +62,7 @@ const config: Config = {
         serif: ['Playfair Display', 'serif'],
         sans: ['Inter', 'sans-serif'],
         script: ['Inter', 'sans-serif'], // Changed from cursive to professional
+        lovelo: ['var(--font-lovelo)', 'sans-serif'],
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',

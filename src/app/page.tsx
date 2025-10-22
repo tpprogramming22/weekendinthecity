@@ -70,15 +70,18 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 py-20 lg:py-32">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-200/30 to-gray-300/30"></div>
-        </div>
+      <section className="relative overflow-hidden py-20 lg:py-32" style={{
+        backgroundImage: 'url(/weekendinthecity1.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}>
+        <div className="absolute inset-0 bg-black/40"></div>
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           {/* Main Headline */}
           <div className="text-center mb-16">
-            <h1 className="text-6xl lg:text-8xl font-bold text-red-600">
+            <h1 className="text-6xl lg:text-8xl font-lovelo font-black text-white drop-shadow-lg">
               WEEKEND IN THE CITY
             </h1>
           </div>
@@ -86,10 +89,10 @@ export default function Home() {
           <div className="max-w-4xl mx-auto text-center">
             <div className="space-y-8">
               <div className="space-y-4">
-                <p className="text-xl text-gray-600 font-medium">
+                <p className="text-xl text-white font-medium drop-shadow-md">
                   Your Munich weekend starts here
                 </p>
-                <p className="text-lg text-gray-500 leading-relaxed">
+                <p className="text-lg text-gray-100 leading-relaxed drop-shadow-md">
                   Join our vibrant community of book lovers for literary adventures, 
                   meaningful discussions, and unforgettable experiences. Discover new 
                   stories, make lasting friendships, and celebrate the joy of reading together.
@@ -104,13 +107,13 @@ export default function Home() {
                     <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
-                <Button variant="outline" size="lg">
+                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-red-600 transition-colors">
                   <Heart className="mr-2 h-5 w-5" />
                   Join Our Club
                 </Button>
               </div>
 
-              <div className="flex items-center justify-center space-x-8 text-sm text-gray-500">
+              <div className="flex items-center justify-center space-x-8 text-sm text-gray-200">
                 <div className="flex items-center">
                   <Users className="h-4 w-4 mr-2" />
                   <span>200+ Members</span>
