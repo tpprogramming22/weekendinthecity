@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Button } from './button'
 import { X, Loader2, User, Mail } from 'lucide-react'
+import Image from 'next/image'
 
 interface Event {
   id: string
@@ -10,6 +11,7 @@ interface Event {
   price: number
   date: string
   time: string
+  image: string
 }
 
 interface BookingModalProps {
@@ -69,9 +71,11 @@ export function BookingModal({ event, isOpen, onClose }: BookingModalProps) {
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm relative">
         {/* Event Image */}
         <div className="relative overflow-hidden rounded-t-2xl">
-          <img
+          <Image
             src={event.image}
             alt={event.title}
+            width={400}
+            height={192}
             className="w-full h-48 object-cover"
           />
           <button
