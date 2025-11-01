@@ -23,7 +23,7 @@ const lovelo = localFont({
 
 export const metadata: Metadata = {
   title: "Weekend in the City | Munich's Premier All-Girls Book Club",
-  description: "Join Munich's most vibrant all-girls book club for literary adventures, meaningful discussions, and unforgettable experiences. Discover new stories, make lasting friendships, and celebrate the joy of reading together.",
+  description: "Join our community and take part in curated social events that bring together locals and internationals in Munich.",
   keywords: "book club Munich, women book club, literature events Munich, book discussion groups, female book club, Munich reading club, book events, literary brunch, author meet and greet, book swap, wine tasting books",
   authors: [{ name: "Weekend in the City" }],
   creator: "Weekend in the City",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   robots: "index, follow",
   openGraph: {
     title: "Weekend in the City | Munich's Premier All-Girls Book Club",
-    description: "Join Munich's most vibrant all-girls book club for literary adventures, meaningful discussions, and unforgettable experiences.",
+    description: "Join our community and take part in curated social events that bring together locals and internationals in Munich.",
     type: "website",
     locale: "en_US",
     siteName: "Weekend in the City",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Weekend in the City | Munich's Premier All-Girls Book Club",
-    description: "Join Munich's most vibrant all-girls book club for literary adventures, meaningful discussions, and unforgettable experiences.",
+    description: "Join our community and take part in curated social events that bring together locals and internationals in Munich.",
     images: ["/weekendinthecity.png"],
   },
   viewport: "width=device-width, initial-scale=1",
