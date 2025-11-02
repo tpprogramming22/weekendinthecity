@@ -121,7 +121,7 @@ export async function POST(request: NextRequest) {
               bookingId: fullBooking.id,
             })
 
-            // Send confirmation email
+            // Send confirmation email to customer
             await resend.emails.send({
               from: 'Weekend in the City <noreply@weekendinthecity.com>',
               to: fullBooking.customer_email,
@@ -131,8 +131,85 @@ export async function POST(request: NextRequest) {
             })
 
             console.log(`📧 Confirmation email sent to ${fullBooking.customer_email}`)
+
+            // Send notification email to Weekendinthecity.muc@gmail.com
+            const notificationHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>New Booking Notification</title>
+</head>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+  <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+    <h2 style="color: #dc2626; border-bottom: 2px solid #dc2626; padding-bottom: 10px;">
+      New Booking Notification
+    </h2>
+    
+    <div style="background-color: #f9fafb; border-radius: 8px; padding: 20px; margin: 20px 0;">
+      <h3 style="margin-top: 0; color: #333;">Event Details</h3>
+      <p style="margin: 10px 0;"><strong>Event:</strong> ${fullEvent.title}</p>
+      <p style="margin: 10px 0;"><strong>Date:</strong> ${fullEvent.date}</p>
+      <p style="margin: 10px 0;"><strong>Time:</strong> ${fullEvent.time}</p>
+      <p style="margin: 10px 0;"><strong>Location:</strong> ${fullEvent.location}</p>
+      <p style="margin: 10px 0;"><strong>Price:</strong> €${fullBooking.amount_paid.toFixed(2)}</p>
+    </div>
+    
+    <div style="background-color: #ffffff; border-left: 4px solid #dc2626; padding: 15px; margin: 20px 0;">
+      <h3 style="margin-top: 0; color: #333;">Customer Details</h3>
+      <p style="margin: 10px 0;"><strong>Name:</strong> ${fullBooking.customer_name}</p>
+      <p style="margin: 10px 0;"><strong>Email:</strong> <a href="mailto:${fullBooking.customer_email}">${fullBooking.customer_email}</a></p>
+      <p style="margin: 10px 0;"><strong>Booking ID:</strong> ${fullBooking.id}</p>
+      <p style="margin: 10px 0;"><strong>Booking Status:</strong> ${fullBooking.booking_status}</p>
+    </div>
+    
+    <div style="background-color: #eff6ff; border-radius: 8px; padding: 15px; margin: 20px 0;">
+      <p style="margin: 0; color: #1e40af; font-size: 14px;">
+        <strong>Event Capacity:</strong> ${fullEvent.sold}/${fullEvent.capacity} tickets sold
+      </p>
+    </div>
+    
+    <p style="color: #666; font-size: 12px; margin-top: 30px;">
+      This is an automated notification from Weekend in the City booking system.
+    </p>
+  </div>
+</body>
+</html>
+            `.trim()
+
+            const notificationText = `
+New Booking Notification
+
+Event Details:
+- Event: ${fullEvent.title}
+- Date: ${fullEvent.date}
+- Time: ${fullEvent.time}
+- Location: ${fullEvent.location}
+- Price: €${fullBooking.amount_paid.toFixed(2)}
+
+Customer Details:
+- Name: ${fullBooking.customer_name}
+- Email: ${fullBooking.customer_email}
+- Booking ID: ${fullBooking.id}
+- Booking Status: ${fullBooking.booking_status}
+
+Event Capacity: ${fullEvent.sold}/${fullEvent.capacity} tickets sold
+
+---
+This is an automated notification from Weekend in the City booking system.
+            `.trim()
+
+            await resend.emails.send({
+              from: 'Weekend in the City <noreply@weekendinthecity.com>',
+              to: 'Weekendinthecity.muc@gmail.com',
+              subject: `New Booking: ${fullEvent.title} - ${fullBooking.customer_name}`,
+              html: notificationHtml,
+              text: notificationText,
+            })
+
+            console.log(`📧 Notification email sent to Weekendinthecity.muc@gmail.com`)
           } catch (emailError) {
-            console.error('Error sending confirmation email:', emailError)
+            console.error('Error sending emails:', emailError)
             // Don't fail the webhook if email fails
           }
         }
