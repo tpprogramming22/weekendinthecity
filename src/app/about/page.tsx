@@ -1,20 +1,24 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
 import { Heart, BookOpen, Users, Sparkles, Calendar, MapPin } from 'lucide-react'
-import Link from 'next/link'
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200">
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-gray-600 to-gray-700 text-white py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden text-white py-20" style={{
+        backgroundImage: 'url(/weekendinthecity1.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}>
+        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center max-w-3xl mx-auto">
             <Heart className="h-16 w-16 mx-auto mb-6 opacity-90" />
-            <h1 className="text-5xl font-bold mb-4">About Us</h1>
+            <h1 className="text-5xl font-lovelo font-black mb-4">ABOUT US</h1>
             <p className="text-xl text-gray-100">
-              Building a vibrant community of women in Munich through meaningful connections and shared experiences
+              Weekend in the City is a new event concept in Munich designed to bring together young locals and internationals through curated social experiences.
             </p>
           </div>
         </div>
@@ -25,21 +29,9 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-4xl font-bold text-gray-800 mb-8 text-center">Our Story</h2>
-            <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
+            <div className="space-y-6 text-lg text-gray-700 leading-relaxed text-center">
               <p>
-                <span className="font-bold text-red-600">Weekend in the City</span> was born from a simple idea: 
-                to create a space where women in Munich could come together, share their love for books, 
-                and build lasting friendships.
-              </p>
-              <p>
-                What started as a small book club has grown into a vibrant community of over 200 members, 
-                bringing together women from all walks of life who share a passion for literature, culture, 
-                and meaningful connections.
-              </p>
-              <p>
-                We believe that the best weekends are spent in good company, exploring new stories, 
-                and creating memories that last a lifetime. From intimate book discussions to exciting 
-                cultural events, we curate experiences that bring our community closer together.
+                Weekend in the City is a space where Munich internationals and newcomers can feel part of the city by exploring new hobbies and events in a welcoming community! What started from a book club is today a diverse group of over 100+ men and women in the city. From yoga flows to crafty nights to themed parties, each event is designed to bring people closer and make Munich feel a little more like home:)
               </p>
             </div>
           </div>
@@ -82,8 +74,7 @@ export default function AboutPage() {
               </div>
               <h3 className="text-xl font-semibold text-gray-800 mb-4">Exclusive Experiences</h3>
               <p className="text-gray-600">
-                Author meet-and-greets, literary brunches, and special events at Munich&apos;s finest 
-                venues. Enjoy unique opportunities you won&apos;t find anywhere else.
+                Members&apos; dinners and themed parties tailored for closer connection and tailored to our community requests and wishes.
               </p>
             </div>
           </div>
@@ -94,18 +85,18 @@ export default function AboutPage() {
       <section className="py-20 bg-white/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-gray-800 mb-12 text-center">Our Community</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="text-center">
-              <div className="text-5xl font-bold text-red-600 mb-2">200+</div>
-              <div className="text-gray-600 text-lg">Active Members</div>
+          <div className="flex items-center justify-center space-x-8 text-sm text-gray-700 max-w-4xl mx-auto">
+            <div className="flex items-center">
+              <Users className="h-6 w-6 mr-2 text-red-600" />
+              <span className="text-xl font-semibold">20+ Members</span>
             </div>
-            <div className="text-center">
-              <div className="text-5xl font-bold text-red-600 mb-2">50+</div>
-              <div className="text-gray-600 text-lg">Books Discussed</div>
+            <div className="flex items-center">
+              <Sparkles className="h-6 w-6 mr-2 text-red-600" />
+              <span className="text-xl font-semibold">Curated Experiences</span>
             </div>
-            <div className="text-center">
-              <div className="text-5xl font-bold text-red-600 mb-2">100+</div>
-              <div className="text-gray-600 text-lg">Events Hosted</div>
+            <div className="flex items-center">
+              <Calendar className="h-6 w-6 mr-2 text-red-600" />
+              <span className="text-xl font-semibold">Monthly Events</span>
             </div>
           </div>
         </div>
@@ -125,32 +116,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-white/50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-4xl font-bold text-gray-800 mb-6">Join Our Community</h2>
-            <p className="text-lg text-gray-700 mb-8">
-              Whether you&apos;re new to Munich or a long-time resident, we&apos;d love to have you 
-              join our community. Make friends, discover great books, and create unforgettable memories.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/events">
-                <Button variant="default" size="lg">
-                  <Calendar className="mr-2 h-5 w-5" />
-                  View Upcoming Events
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button variant="outline" size="lg">
-                  <Heart className="mr-2 h-5 w-5" />
-                  Get in Touch
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   )
 }

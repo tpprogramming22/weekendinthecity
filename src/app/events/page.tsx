@@ -85,13 +85,19 @@ export default function EventsPage() {
   }, [selectedCategory, events])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200">
+    <div className="min-h-screen">
       {/* Header Section */}
-      <section className="bg-gradient-to-r from-gray-600 to-gray-700 text-white py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden text-white py-20" style={{
+        backgroundImage: 'url(/weekendinthecity1.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}>
+        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center max-w-3xl mx-auto">
             <Calendar className="h-16 w-16 mx-auto mb-6 opacity-90" />
-            <h1 className="text-5xl font-bold mb-4">Upcoming Events</h1>
+            <h1 className="text-5xl font-lovelo font-black mb-4">UPCOMING EVENTS</h1>
             <p className="text-xl text-gray-100">
               Discover amazing experiences and connect with like-minded women in Munich
             </p>
@@ -131,7 +137,7 @@ export default function EventsPage() {
       </section>
 
       {/* Events Grid Section */}
-      <section className="py-16">
+      <section className="py-16 bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {/* Loading State */}
           {isLoading && (
@@ -144,7 +150,7 @@ export default function EventsPage() {
           {/* Error State */}
           {error && !isLoading && (
             <div className="text-center py-20">
-              <div className="bg-red-50 border border-red-200 rounded-lg p-8 max-w-md mx-auto">
+              <div className="bg-red-50/90 backdrop-blur-sm border border-red-200 rounded-lg p-8 max-w-md mx-auto">
                 <p className="text-red-800 font-medium text-lg">{error}</p>
               </div>
             </div>
