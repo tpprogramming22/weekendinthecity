@@ -2,8 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Button } from '@/components/ui/button'
-import { Heart, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
 
 export function Header() {
@@ -54,13 +53,6 @@ export function Header() {
             </Link>
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden md:flex items-center space-x-4">
-            <Button variant="default" size="sm">
-              <Heart className="mr-2 h-4 w-4" />
-              Join Our Club
-            </Button>
-          </div>
 
           {/* Mobile menu button */}
           <button
@@ -107,10 +99,6 @@ export function Header() {
               >
                 Contact
               </Link>
-              <Button variant="default" size="sm" className="w-full mt-4">
-                <Heart className="mr-2 h-4 w-4" />
-                Join Our Club
-              </Button>
             </nav>
           </div>
         )}

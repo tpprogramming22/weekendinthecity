@@ -17,6 +17,10 @@ export function getBookingConfirmationHTML({
   amountPaid,
   bookingId,
 }: BookingConfirmationEmailProps): string {
+  // Encode booking ID for QR code URL
+  const encodedBookingId = encodeURIComponent(bookingId)
+  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodedBookingId}`
+  
   return `
 <!DOCTYPE html>
 <html>
@@ -78,14 +82,29 @@ export function getBookingConfirmationHTML({
         </div>
       </div>
 
-      <!-- Booking Reference -->
+      <!-- Booking Reference with QR Code -->
       <div style="background-color: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 16px; margin-bottom: 30px;">
-        <p style="margin: 0; font-size: 14px; color: #991b1b;">
-          <strong>Booking Reference:</strong> ${bookingId}
-        </p>
-        <p style="margin: 8px 0 0 0; font-size: 12px; color: #991b1b;">
-          Please save this email or bring this reference number to the event.
-        </p>
+        <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 200px;">
+            <p style="margin: 0 0 8px 0; font-size: 14px; color: #991b1b;">
+              <strong>Booking Reference:</strong> ${bookingId}
+            </p>
+            <p style="margin: 0; font-size: 12px; color: #991b1b;">
+              Please save this email or bring this reference number to the event.
+            </p>
+          </div>
+          <div style="text-align: center;">
+            <p style="margin: 0 0 8px 0; font-size: 12px; color: #991b1b; font-weight: bold;">Your Ticket QR Code</p>
+            <img 
+              src="${qrCodeUrl}" 
+              alt="Booking QR Code" 
+              style="width: 150px; height: 150px; border: 2px solid #dc2626; border-radius: 8px; background-color: white; padding: 8px; display: block; margin: 0 auto;"
+            />
+            <p style="margin: 8px 0 0 0; font-size: 10px; color: #991b1b; font-style: italic;">
+              If the QR code doesn't display, please enable images in your email client
+            </p>
+          </div>
+        </div>
       </div>
 
       <!-- Important Information -->
