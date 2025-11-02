@@ -93,9 +93,7 @@ export default function Home() {
                   Your Munich weekend starts here
                 </p>
                 <p className="text-lg text-gray-100 leading-relaxed drop-shadow-md">
-                  Join our vibrant community of book lovers for literary adventures, 
-                  meaningful discussions, and unforgettable experiences. Discover new 
-                  stories, make lasting friendships, and celebrate the joy of reading together.
+                Join our community and take part in curated social events that bring together locals and internationals in Munich.
                 </p>
               </div>
               
@@ -121,7 +119,7 @@ export default function Home() {
               <div className="flex items-center justify-center space-x-8 text-sm text-gray-200">
                 <div className="flex items-center">
                   <Users className="h-4 w-4 mr-2" />
-                  <span>20+ Members</span>
+                  <span>100+ Members</span>
                 </div>
                 <div className="flex items-center">
                   <BookOpen className="h-4 w-4 mr-2" />
@@ -144,10 +142,7 @@ export default function Home() {
             <h2 className="font-sans font-bold text-4xl lg:text-5xl text-gray-700 mb-4">
               Coming up
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Join a community that makes Munich feel like home. Connect with like-minded women 
-              through meaningful experiences and lasting friendships.
-            </p>
+            
           </div>
 
           {/* Loading State */}
