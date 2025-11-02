@@ -139,7 +139,7 @@ export default function Home() {
       <section className="py-20 bg-white/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="font-sans font-bold text-4xl lg:text-5xl text-gray-700 mb-4">
+            <h2 className="font-lovelo font-black text-4xl lg:text-5xl text-red-600 mb-4">
               Coming up
             </h2>
             

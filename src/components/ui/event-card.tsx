@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { BookingModal } from '@/components/ui/booking-modal'
-import { Calendar, Clock, MapPin, Users, Heart } from 'lucide-react'
+import { Calendar, Clock, MapPin, Users } from 'lucide-react'
 import Image from 'next/image'
 
 interface Event {
@@ -38,8 +38,19 @@ export function EventCard({ event, onBookNow }: EventCardProps) {
     }
   }
 
+  const handleCardClick = (e: React.MouseEvent) => {
+    // Don't open modal if clicking on the Book Now button
+    if ((e.target as HTMLElement).closest('button')) {
+      return
+    }
+    setIsModalOpen(true)
+  }
+
   return (
-    <Card className="group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+    <Card 
+      className="group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
+      onClick={handleCardClick}
+    >
       <div className="relative overflow-hidden rounded-t-2xl">
         <Image
           src={event.image}
@@ -53,10 +64,10 @@ export function EventCard({ event, onBookNow }: EventCardProps) {
             {event.category}
           </span>
         </div>
-        <div className="absolute top-4 right-4">
-          <button className="bg-white/80 hover:bg-white text-gray-600 hover:text-gray-700 p-2 rounded-full transition-all">
-            <Heart className="h-4 w-4" />
-          </button>
+        <div className="absolute bottom-4 right-4">
+          <span className="bg-white/95 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-lg text-xl font-bold shadow-lg">
+            {event.price === 0 ? 'FREE' : `€${event.price}`}
+          </span>
         </div>
       </div>
 
@@ -78,15 +89,12 @@ export function EventCard({ event, onBookNow }: EventCardProps) {
           <MapPin className="h-4 w-4 mr-2" />
           <span className="truncate">{event.location}</span>
         </div>
-        <div className="flex items-center justify-between text-sm">
+        <div className="flex items-center text-sm">
           <div className="flex items-center text-gray-600">
             <Users className="h-4 w-4 mr-2" />
             <span className={isSoldOut ? 'font-semibold text-red-600' : ''}>
               {event.sold}/{event.capacity} sold
             </span>
-          </div>
-          <div className="font-semibold text-gray-700">
-            €{event.price}
           </div>
         </div>
       </CardContent>
@@ -97,7 +105,10 @@ export function EventCard({ event, onBookNow }: EventCardProps) {
           size="sm" 
           className="w-full"
           disabled={isSoldOut}
-          onClick={handleBookClick}
+          onClick={(e) => {
+            e.stopPropagation() // Prevent card click when clicking button
+            handleBookClick()
+          }}
         >
           {isSoldOut ? 'Sold Out' : 'Book Now'}
         </Button>

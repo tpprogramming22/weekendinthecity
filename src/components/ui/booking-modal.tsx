@@ -8,9 +8,11 @@ import Image from 'next/image'
 interface Event {
   id: string
   title: string
+  description: string
   price: number
   date: string
   time: string
+  location: string
   image: string
 }
 
@@ -92,10 +94,16 @@ export function BookingModal({ event, isOpen, onClose }: BookingModalProps) {
           {/* Header */}
           <div className="mb-6">
             <h2 className="text-xl font-bold text-gray-800 mb-2">Complete Your Booking</h2>
-            <p className="text-gray-600 mb-2">{event.title}</p>
-            <div className="text-sm text-gray-500">
+            <p className="text-gray-600 mb-2 font-semibold">{event.title}</p>
+            {event.description && (
+              <p className="text-sm text-gray-600 mb-3 leading-relaxed">{event.description}</p>
+            )}
+            <div className="text-sm text-gray-500 space-y-1">
               <p>{event.date} at {event.time}</p>
-              <p className="font-semibold text-gray-700 mt-1">€{event.price}</p>
+              {event.location && <p>{event.location}</p>}
+              <p className="font-semibold text-gray-700 mt-1">
+                {event.price === 0 ? 'FREE' : `€${event.price}`}
+              </p>
             </div>
           </div>
 
@@ -166,7 +174,7 @@ export function BookingModal({ event, isOpen, onClose }: BookingModalProps) {
               </>
             ) : (
               <>
-                Proceed to Payment (€{event.price})
+                Proceed to Payment {event.price === 0 ? '(FREE)' : `(€${event.price})`}
               </>
             )}
           </Button>
