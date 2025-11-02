@@ -128,7 +128,7 @@ export function getBookingConfirmationHTML({
           </a>
         </p>
         <p style="font-size: 12px; color: #999; margin: 0;">
-          © 2024 Weekend in the City | Munich, Germany
+          © 2025 Weekend in the City | Munich, Germany
         </p>
       </div>
     </div>
@@ -175,7 +175,7 @@ IMPORTANT INFORMATION
 
 Questions? Contact us at Weekendinthecity.muc@gmail.com
 
-© 2024 Weekend in the City | Munich, Germany
+© 2025 Weekend in the City | Munich, Germany
   `.trim()
 }
 

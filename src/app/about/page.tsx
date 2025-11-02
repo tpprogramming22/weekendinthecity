@@ -31,7 +31,7 @@ export default function AboutPage() {
             <h2 className="text-4xl font-bold text-gray-800 mb-8 text-center">Our Story</h2>
             <div className="space-y-6 text-lg text-gray-700 leading-relaxed text-center">
               <p>
-                Weekend in the City is a space where Munich internationals and newcomers can feel part of the city by exploring new hobbies and events in a welcoming community! What started from a book club is today a diverse group of over 100+ men and women in the city. From yoga flows to crafty nights to themed parties, each event is designed to bring people closer and make Munich feel a little more like home:)
+                Weekend in the City is a space where Munich internationals and newcomers can feel part of the city by exploring new hobbies and events in a welcoming community! What started as a book club is today a diverse group of over 100+ members in the city. From yoga flows to crafty nights to themed parties, each event is designed to bring people closer and make Munich feel a little more like home:)
               </p>
             </div>
           </div>
@@ -88,7 +88,7 @@ export default function AboutPage() {
           <div className="flex items-center justify-center space-x-8 text-sm text-gray-700 max-w-4xl mx-auto">
             <div className="flex items-center">
               <Users className="h-6 w-6 mr-2 text-red-600" />
-              <span className="text-xl font-semibold">20+ Members</span>
+              <span className="text-xl font-semibold">100+ Members</span>
             </div>
             <div className="flex items-center">
               <Sparkles className="h-6 w-6 mr-2 text-red-600" />

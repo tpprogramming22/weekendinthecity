@@ -81,8 +81,13 @@ export function Footer() {
                 placeholder="Your email"
                 className="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-rose-300"
               />
-              <button className="px-4 py-2 bg-gradient-to-r from-rose-400 to-rose-500 text-white text-sm font-medium rounded-r-lg hover:from-rose-500 hover:to-rose-600 transition-all">
-                Subscribe
+              <button className="group relative px-4 py-2 bg-gradient-to-r from-rose-400 to-rose-500 text-white text-sm font-medium rounded-r-lg hover:from-rose-500 hover:to-rose-600 transition-all overflow-hidden">
+                <span className="inline-block group-hover:opacity-0 transition-opacity">
+                  Subscribe
+                </span>
+                <span className="absolute inset-0 inline-flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  Coming soon
+                </span>
               </button>
             </div>
           </div>
@@ -90,7 +95,7 @@ export function Footer() {
 
         <div className="border-t border-gray-200/50 mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm">
-            © 2024 Weekend in the City. All rights reserved.
+            © 2025 Weekend in the City. All rights reserved.
           </p>
           <div className="flex items-center space-x-2 mt-4 sm:mt-0">
             <Heart className="h-4 w-4 text-gray-500" />
