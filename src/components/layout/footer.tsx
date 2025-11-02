@@ -23,8 +23,8 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-gray-600 text-sm">
-              Munich&apos;s premier all-girls book club. Join us for literary adventures, 
-              meaningful discussions, and unforgettable experiences.
+              Munich&apos;s international English-speaking events community. Join us for curated 
+              weekend events, fun social activities, and connect with expats and locals in Munich.
             </p>
             <div className="flex space-x-4">
               <a 
@@ -73,7 +73,7 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="font-semibold text-gray-800">Stay Updated</h3>
             <p className="text-gray-600 text-sm">
-              Get notified about our latest events and book club meetings.
+              Get notified about our latest events and weekend activities in Munich.
             </p>
             <div className="flex">
               <input

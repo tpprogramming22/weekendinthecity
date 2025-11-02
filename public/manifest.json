@@ -1,7 +1,7 @@
 {
-  "name": "Weekend in the City - Munich's Premier Book Club",
+  "name": "Weekend in the City - Munich Events & Social Community",
   "short_name": "Weekend in the City",
-  "description": "Join Munich's most vibrant all-girls book club for literary adventures, meaningful discussions, and unforgettable experiences.",
+  "description": "Join Munich's international English-speaking community for curated weekend events, fun social activities, and memorable experiences. Connect with expats and locals in Munich.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#fefdfb",
@@ -21,7 +21,7 @@
       "purpose": "any maskable"
     }
   ],
-  "categories": ["books", "lifestyle", "social"],
+  "categories": ["events", "lifestyle", "social", "community"],
   "lang": "en",
   "dir": "ltr"
 }
