@@ -48,8 +48,9 @@ export function EventCard({ event, onBookNow }: EventCardProps) {
 
   return (
     <Card 
-      className="group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
+      className="group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer relative z-0 hover:z-10 mb-4 md:mb-0 overflow-visible"
       onClick={handleCardClick}
+      style={{ isolation: 'isolate' }}
     >
       <div className="relative overflow-hidden rounded-t-2xl">
         <Image
@@ -99,11 +100,11 @@ export function EventCard({ event, onBookNow }: EventCardProps) {
         </div>
       </CardContent>
 
-      <CardFooter>
+      <CardFooter className="relative z-20">
         <Button 
           variant={isSoldOut ? "outline" : "default"} 
           size="sm" 
-          className="w-full"
+          className="w-full relative z-20"
           disabled={isSoldOut}
           onClick={(e) => {
             e.stopPropagation() // Prevent card click when clicking button

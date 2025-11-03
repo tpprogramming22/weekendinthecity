@@ -69,10 +69,10 @@ export function BookingModal({ event, isOpen, onClose }: BookingModalProps) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm overflow-y-auto">
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm relative my-4 max-h-[95vh] flex flex-col">
         {/* Event Image */}
-        <div className="relative overflow-hidden rounded-t-2xl">
+        <div className="relative overflow-hidden rounded-t-2xl flex-shrink-0">
           <Image
             src={event.image}
             alt={event.title}
@@ -90,7 +90,7 @@ export function BookingModal({ event, isOpen, onClose }: BookingModalProps) {
         </div>
 
         {/* Content */}
-        <div className="p-6">
+        <div className="p-6 pb-8 overflow-y-auto flex-1 min-h-0">
           {/* Header */}
           <div className="mb-6">
             <h2 className="text-xl font-bold text-gray-800 mb-2">Complete Your Booking</h2>
@@ -164,7 +164,7 @@ export function BookingModal({ event, isOpen, onClose }: BookingModalProps) {
             type="submit"
             variant="default"
             size="lg"
-            className="w-full"
+            className="w-full mt-4"
             disabled={isLoading}
           >
             {isLoading ? (
