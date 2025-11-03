@@ -68,11 +68,23 @@ export function BookingModal({ event, isOpen, onClose }: BookingModalProps) {
     }
   }
 
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose()
+    }
+  }
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm overflow-y-auto">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm relative my-4 max-h-[95vh] flex flex-col">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+      onClick={handleBackdropClick}
+    >
+      <div 
+        className="bg-white rounded-2xl shadow-2xl w-full max-w-sm relative"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Event Image */}
-        <div className="relative overflow-hidden rounded-t-2xl flex-shrink-0">
+        <div className="relative overflow-hidden rounded-t-2xl">
           <Image
             src={event.image}
             alt={event.title}
@@ -90,7 +102,7 @@ export function BookingModal({ event, isOpen, onClose }: BookingModalProps) {
         </div>
 
         {/* Content */}
-        <div className="p-6 pb-8 overflow-y-auto flex-1 min-h-0">
+        <div className="p-6">
           {/* Header */}
           <div className="mb-6">
             <h2 className="text-xl font-bold text-gray-800 mb-2">Complete Your Booking</h2>
