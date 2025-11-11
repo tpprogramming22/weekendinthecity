@@ -26,6 +26,7 @@ interface EventCardProps {
 }
 
 const EVENT_CARD_OPEN = 'event-card-open'
+type EventCardOpenDetail = { id: string }
 
 export function EventCard({ event, onBookNow }: EventCardProps) {
   const isSoldOut = event.sold >= event.capacity
@@ -43,7 +44,7 @@ export function EventCard({ event, onBookNow }: EventCardProps) {
       const { width, height } = cardRef.current.getBoundingClientRect()
       setCardSize({ width, height })
     }
-    window.dispatchEvent(new CustomEvent<{ id: string }>(EVENT_CARD_OPEN, { detail: { id: event.id } }))
+    window.dispatchEvent(new CustomEvent<EventCardOpenDetail>(EVENT_CARD_OPEN, { detail: { id: event.id } }))
     setIsExpanded(true)
     setError(null)
   }
@@ -121,9 +122,8 @@ export function EventCard({ event, onBookNow }: EventCardProps) {
       }
     }
 
-    const handleOpen = (evt: Event) => {
-      const custom = evt as CustomEvent<{ id: string }>
-      if (custom.detail?.id !== event.id) {
+    const handleOpen = (evt: CustomEvent<EventCardOpenDetail>) => {
+      if (evt.detail?.id !== event.id) {
         setIsExpanded(false)
         setError(null)
         setIsLoading(false)
@@ -133,12 +133,12 @@ export function EventCard({ event, onBookNow }: EventCardProps) {
 
     document.addEventListener('mousedown', handleOutsideClick)
     document.addEventListener('touchstart', handleOutsideClick)
-    window.addEventListener(EVENT_CARD_OPEN, handleOpen)
+    window.addEventListener(EVENT_CARD_OPEN, handleOpen as EventListener)
 
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick)
       document.removeEventListener('touchstart', handleOutsideClick)
-      window.removeEventListener(EVENT_CARD_OPEN, handleOpen)
+      window.removeEventListener(EVENT_CARD_OPEN, handleOpen as EventListener)
     }
   }, [isExpanded, event.id])
 
