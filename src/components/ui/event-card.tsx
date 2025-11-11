@@ -43,11 +43,7 @@ export function EventCard({ event, onBookNow }: EventCardProps) {
       const { width, height } = cardRef.current.getBoundingClientRect()
       setCardSize({ width, height })
     }
-<<<<<<< HEAD
-    window.dispatchEvent(new CustomEvent(EVENT_CARD_OPEN, { detail: event.id }))
-=======
     window.dispatchEvent(new CustomEvent<{ id: string }>(EVENT_CARD_OPEN, { detail: { id: event.id } }))
->>>>>>> bad1ae7 (Refactor event booking into inline card flow)
     setIsExpanded(true)
     setError(null)
   }
@@ -126,13 +122,8 @@ export function EventCard({ event, onBookNow }: EventCardProps) {
     }
 
     const handleOpen = (evt: Event) => {
-<<<<<<< HEAD
-      const custom = evt as CustomEvent<string>
-      if (custom.detail !== event.id) {
-=======
       const custom = evt as CustomEvent<{ id: string }>
       if (custom.detail?.id !== event.id) {
->>>>>>> bad1ae7 (Refactor event booking into inline card flow)
         setIsExpanded(false)
         setError(null)
         setIsLoading(false)
@@ -142,20 +133,12 @@ export function EventCard({ event, onBookNow }: EventCardProps) {
 
     document.addEventListener('mousedown', handleOutsideClick)
     document.addEventListener('touchstart', handleOutsideClick)
-<<<<<<< HEAD
     window.addEventListener(EVENT_CARD_OPEN, handleOpen)
-=======
-    window.addEventListener(EVENT_CARD_OPEN, handleOpen as EventListener)
->>>>>>> bad1ae7 (Refactor event booking into inline card flow)
 
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick)
       document.removeEventListener('touchstart', handleOutsideClick)
-<<<<<<< HEAD
       window.removeEventListener(EVENT_CARD_OPEN, handleOpen)
-=======
-      window.removeEventListener(EVENT_CARD_OPEN, handleOpen as EventListener)
->>>>>>> bad1ae7 (Refactor event booking into inline card flow)
     }
   }, [isExpanded, event.id])
 
