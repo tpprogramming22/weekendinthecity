@@ -79,6 +79,7 @@ export async function POST(request: NextRequest) {
       ],
       mode: 'payment',
       customer_email: customerEmail,
+      allow_promotion_codes: true, // Enable discount code field on checkout page
       success_url: `${appUrl}/booking-success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${appUrl}/events?canceled=true`,
       metadata: {

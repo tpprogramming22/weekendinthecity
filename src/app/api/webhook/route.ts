@@ -47,12 +47,16 @@ export async function POST(request: NextRequest) {
           break
         }
 
+        // Get actual amount paid (after discounts) from session
+        const actualAmountPaid = session.amount_total ? session.amount_total / 100 : null
+
         // Update booking status to confirmed
         const { error: bookingError } = await supabase
           .from('bookings')
           .update({
             booking_status: 'confirmed',
             stripe_payment_intent_id: session.payment_intent as string,
+            ...(actualAmountPaid !== null && { amount_paid: actualAmountPaid }),
           })
           .eq('id', bookingId)
 
