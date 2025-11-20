@@ -163,6 +163,7 @@ export async function POST(request: NextRequest) {
       <h3 style="margin-top: 0; color: #333;">Customer Details</h3>
       <p style="margin: 10px 0;"><strong>Name:</strong> ${fullBooking.customer_name}</p>
       <p style="margin: 10px 0;"><strong>Email:</strong> <a href="mailto:${fullBooking.customer_email}">${fullBooking.customer_email}</a></p>
+      ${fullBooking.referral_name ? `<p style="margin: 10px 0;"><strong>Referred By:</strong> ${fullBooking.referral_name}</p>` : ''}
       <p style="margin: 10px 0;"><strong>Booking ID:</strong> ${fullBooking.id}</p>
       <p style="margin: 10px 0;"><strong>Booking Status:</strong> ${fullBooking.booking_status}</p>
     </div>
@@ -194,7 +195,7 @@ Event Details:
 Customer Details:
 - Name: ${fullBooking.customer_name}
 - Email: ${fullBooking.customer_email}
-- Booking ID: ${fullBooking.id}
+${fullBooking.referral_name ? `- Referred By: ${fullBooking.referral_name}\n` : ''}- Booking ID: ${fullBooking.id}
 - Booking Status: ${fullBooking.booking_status}
 
 Event Capacity: ${fullEvent.sold}/${fullEvent.capacity} tickets sold
