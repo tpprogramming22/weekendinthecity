@@ -4,7 +4,7 @@ import { supabase } from '@/lib/supabase'
 
 export async function POST(request: NextRequest) {
   try {
-    const { eventId, customerName, customerEmail } = await request.json()
+    const { eventId, customerName, customerEmail, referralName } = await request.json()
 
     // Validate input
     if (!eventId || !customerName || !customerEmail) {
@@ -37,15 +37,22 @@ export async function POST(request: NextRequest) {
     }
 
     // Create a pending booking first
+    const bookingData: any = {
+      event_id: eventId,
+      customer_name: customerName,
+      customer_email: customerEmail,
+      amount_paid: event.price,
+      booking_status: 'pending'
+    }
+    
+    // Add referral name if provided (will only be saved if column exists)
+    if (referralName) {
+      bookingData.referral_name = referralName
+    }
+    
     const { data: booking, error: bookingError } = await supabase
       .from('bookings')
-      .insert({
-        event_id: eventId,
-        customer_name: customerName,
-        customer_email: customerEmail,
-        amount_paid: event.price,
-        booking_status: 'pending'
-      })
+      .insert(bookingData)
       .select()
       .single()
 
@@ -87,6 +94,7 @@ export async function POST(request: NextRequest) {
         booking_id: booking.id,
         customer_name: customerName,
         event_title: event.title,
+        ...(referralName && { referral_name: referralName }),
       },
     })
 

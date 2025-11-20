@@ -33,6 +33,7 @@ export function EventCard({ event, onBookNow }: EventCardProps) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [customerName, setCustomerName] = useState('')
   const [customerEmail, setCustomerEmail] = useState('')
+  const [referralName, setReferralName] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [cardSize, setCardSize] = useState<{ width: number; height: number } | null>(null)
@@ -69,6 +70,7 @@ export function EventCard({ event, onBookNow }: EventCardProps) {
     setIsExpanded(false)
     setError(null)
     setIsLoading(false)
+    setReferralName('')
     scrollRef.current?.scrollTo({ top: 0 })
   }
 
@@ -87,6 +89,7 @@ export function EventCard({ event, onBookNow }: EventCardProps) {
           eventId: event.id,
           customerName,
           customerEmail,
+          referralName: referralName.trim() || undefined,
         }),
       })
 
@@ -230,6 +233,24 @@ export function EventCard({ event, onBookNow }: EventCardProps) {
                 </div>
                 <p className="mt-1 text-xs text-gray-500">
                   Your ticket will be sent to this email
+                </p>
+              </div>
+
+              <div>
+                <label htmlFor={`referral-${event.id}`} className="mb-2 block text-sm font-medium text-gray-700">
+                  Referred By (Optional)
+                </label>
+                <input
+                  type="text"
+                  id={`referral-${event.id}`}
+                  disabled={isLoading}
+                  value={referralName}
+                  onChange={(e) => setReferralName(e.target.value)}
+                  className="w-full rounded-lg border border-gray-300 py-3 px-3 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1 focus:ring-offset-white disabled:cursor-not-allowed disabled:bg-gray-100 focus:border-gray-300 transition-shadow"
+                  placeholder="Enter the name of who referred you"
+                />
+                <p className="mt-1 text-xs text-gray-500">
+                  Let us know who referred you to this event
                 </p>
               </div>
 
