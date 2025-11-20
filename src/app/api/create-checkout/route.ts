@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create a pending booking first
-    const bookingData: any = {
+    const bookingData: Record<string, unknown> = {
       event_id: eventId,
       customer_name: customerName,
       customer_email: customerEmail,
