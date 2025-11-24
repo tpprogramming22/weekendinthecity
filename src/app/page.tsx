@@ -5,7 +5,6 @@ import { EventCard } from '@/components/ui/event-card'
 import { BookOpen, Heart, Users, Calendar, Sparkles, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { supabase } from '@/lib/supabase'
 
 interface Event {
   id: string
@@ -30,31 +29,14 @@ export default function Home() {
     async function fetchEvents() {
       try {
         setIsLoading(true)
-        const { data, error } = await supabase
-          .from('events')
-          .select('*')
-          .order('created_at', { ascending: true })
-
-        if (error) {
-          throw error
+        const response = await fetch('/api/events')
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch events')
         }
 
-        // Transform the data to match the Event interface
-        const transformedEvents: Event[] = (data || []).map(event => ({
-          id: event.id.toString(),
-          title: event.title,
-          description: event.description,
-          date: event.date,
-          time: event.time,
-          location: event.location,
-          price: event.price,
-          capacity: event.capacity,
-          sold: event.sold,
-          image: event.image,
-          category: event.category
-        }))
-
-        setEvents(transformedEvents)
+        const { events: eventsData } = await response.json()
+        setEvents(eventsData || [])
         setError(null)
       } catch (err) {
         console.error('Error fetching events:', err)

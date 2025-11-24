@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { supabase } from '@/lib/supabase'
 import { EventCard } from '@/components/ui/event-card'
 import { Button } from '@/components/ui/button'
 import { Calendar, Filter } from 'lucide-react'
@@ -32,35 +31,19 @@ export default function EventsPage() {
     async function fetchEvents() {
       try {
         setIsLoading(true)
-        const { data, error } = await supabase
-          .from('events')
-          .select('*')
-          .order('created_at', { ascending: true })
-
-        if (error) {
-          throw error
+        const response = await fetch('/api/events')
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch events')
         }
 
-        const transformedEvents: Event[] = (data || []).map(event => ({
-          id: event.id.toString(),
-          title: event.title,
-          description: event.description,
-          date: event.date,
-          time: event.time,
-          location: event.location,
-          price: event.price,
-          capacity: event.capacity,
-          sold: event.sold,
-          image: event.image,
-          category: event.category
-        }))
-
-        setEvents(transformedEvents)
-        setFilteredEvents(transformedEvents)
+        const { events: eventsData } = await response.json()
+        setEvents(eventsData || [])
+        setFilteredEvents(eventsData || [])
 
         // Extract unique categories
         const uniqueCategories = Array.from(
-          new Set(transformedEvents.map(event => event.category))
+          new Set((eventsData || []).map((event: Event) => event.category))
         )
         setCategories(uniqueCategories)
 

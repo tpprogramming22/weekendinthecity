@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { stripe } from '@/lib/stripe'
-import { supabase } from '@/lib/supabase'
+import { supabaseServer } from '@/lib/supabase-server'
 import { resend } from '@/lib/resend'
 import { getBookingConfirmationHTML, getBookingConfirmationText } from '@/lib/email-templates'
 import Stripe from 'stripe'
@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
         const actualAmountPaid = session.amount_total ? session.amount_total / 100 : null
 
         // Update booking status to confirmed
-        const { error: bookingError } = await supabase
+        const { error: bookingError } = await supabaseServer
           .from('bookings')
           .update({
             booking_status: 'confirmed',
@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
         }
 
         // Increment the sold count for the event
-        const { data: currentEvent, error: fetchError } = await supabase
+        const { data: currentEvent, error: fetchError } = await supabaseServer
           .from('events')
           .select('sold')
           .eq('id', eventId)
@@ -77,7 +77,7 @@ export async function POST(request: NextRequest) {
           break
         }
 
-        const { error: updateError } = await supabase
+        const { error: updateError } = await supabaseServer
           .from('events')
           .update({ sold: currentEvent.sold + 1 })
           .eq('id', eventId)
@@ -90,13 +90,13 @@ export async function POST(request: NextRequest) {
         console.log(`✅ Booking confirmed! Event ${eventId} sold count updated to ${currentEvent.sold + 1}`)
 
         // Fetch full booking and event details for email
-        const { data: fullBooking } = await supabase
+        const { data: fullBooking } = await supabaseServer
           .from('bookings')
           .select('*')
           .eq('id', bookingId)
           .single()
 
-        const { data: fullEvent } = await supabase
+        const { data: fullEvent } = await supabaseServer
           .from('events')
           .select('*')
           .eq('id', eventId)
@@ -228,7 +228,7 @@ This is an automated notification from Weekend in the City booking system.
 
         if (bookingId) {
           // Cancel the booking if checkout expired
-          await supabase
+          await supabaseServer
             .from('bookings')
             .update({ booking_status: 'cancelled' })
             .eq('id', bookingId)

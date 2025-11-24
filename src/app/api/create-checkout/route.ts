@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { stripe } from '@/lib/stripe'
-import { supabase } from '@/lib/supabase'
+import { supabaseServer } from '@/lib/supabase-server'
 
 export async function POST(request: NextRequest) {
   try {
@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Fetch event from database
-    const { data: event, error: eventError } = await supabase
+    const { data: event, error: eventError } = await supabaseServer
       .from('events')
       .select('*')
       .eq('id', eventId)
@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
       bookingData.referral_name = referralName
     }
     
-    const { data: booking, error: bookingError } = await supabase
+    const { data: booking, error: bookingError } = await supabaseServer
       .from('bookings')
       .insert(bookingData)
       .select()
@@ -99,7 +99,7 @@ export async function POST(request: NextRequest) {
     })
 
     // Update booking with Stripe session ID
-    await supabase
+    await supabaseServer
       .from('bookings')
       .update({ stripe_session_id: session.id })
       .eq('id', booking.id)
