@@ -28,12 +28,6 @@ export default function TestPages() {
       path: '/contact',
       description: 'Contact form and information',
       features: ['Working contact form', 'Contact details', 'Quick FAQ']
-    },
-    {
-      name: 'Test Connection',
-      path: '/test-connection',
-      description: 'Supabase integration tests',
-      features: ['Connection test', 'Table test', 'Data fetch test']
     }
   ]
 
