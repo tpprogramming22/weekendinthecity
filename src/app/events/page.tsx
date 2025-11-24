@@ -37,14 +37,15 @@ export default function EventsPage() {
           throw new Error('Failed to fetch events')
         }
 
-        const { events: eventsData } = await response.json()
-        setEvents(eventsData || [])
-        setFilteredEvents(eventsData || [])
+        const { events: eventsData } = await response.json() as { events: Event[] }
+        const events = (eventsData || []) as Event[]
+        setEvents(events)
+        setFilteredEvents(events)
 
         // Extract unique categories
         const uniqueCategories = Array.from(
-          new Set((eventsData || []).map((event: Event) => event.category))
-        )
+          new Set(events.map((event) => event.category))
+        ) as string[]
         setCategories(uniqueCategories)
 
         setError(null)
