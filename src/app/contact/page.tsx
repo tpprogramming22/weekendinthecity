@@ -251,12 +251,12 @@ export default function ContactPage() {
                     <div>
                       <h3 className="font-semibold text-gray-800 mb-1">Instagram</h3>
                       <a 
-                        href="https://instagram.com/weekend.inthecity"
+                        href="https://instagram.com/weekendinthecity"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-600 hover:text-red-600 transition-colors"
                       >
-                        @weekend.inthecity
+                        @weekendinthecity
                       </a>
                     </div>
                   </div>
